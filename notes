@@ -1,0 +1,23 @@
+extensions.
+    bracket pair colorizer
+    docker
+    graphql for vscode
+    prettier
+
+npm init - y
+yarn add -D @types/node typescript
+yarn add -D ts-node
+npx tsconfig.json #node
+yarn add -D nodemon
+yarn add @mikro-orm/cli @mikro-orm/core @mikro-orm/migrations @mikro-orm/postgresql pg
+yarn watch
+yarn dev
+#postgresql install with user pass postgres
+docker container run --name postgresdb -e POSTGRES_PASSWORD=admin -d -p 5432:5432 postgres
+sudo -u postgres psql
+sudo apt install postgresql-client-common
+sudo apt-get install postgresql-client
+psql -h localhost -p 5432 -U postgres -W
+create database lireddit with template=template0 owner=postgres;
+\l
+createdb lireddit
