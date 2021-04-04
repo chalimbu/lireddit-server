@@ -33,26 +33,18 @@ class UserRespose {
 
 @Resolver()
 export class UserResolver {
-    @Mutation(() => UserRespose)
+    @Mutation(() => User)
     async register(
         @Arg('options') options: UsernamePasswordInput,
         @Ctx() { em }: MyContext
-    ):Promise<UserRespose> {
-        if(options.username.length<=2){
-            return {
-                errors: [{
-                    field: "username",
-                    message: "the username is too short"
-                }]
-            }
-        }
+    ) {
         const hashedPassword = await argon2.hash(options.password)
         const user = em.create(User, {
             username: options.username,
             password: hashedPassword,
         })
         await em.persistAndFlush(user);
-        return {user:user};
+        return user
     }
 
     @Query(() => UserRespose)
@@ -62,7 +54,7 @@ export class UserResolver {
     ): Promise<UserRespose> {
 
         const userFound: User | null = await em.findOne(User, { username: options.username })
-        const loginError={
+        const loginError = {
             errors: [
                 {
                     field: 'username',
@@ -73,8 +65,8 @@ export class UserResolver {
         if (!userFound) {
             return loginError;
         }
-        const valid=await argon2.verify(userFound.password,options.password)
-        if(!valid){
+        const valid = await argon2.verify(userFound.password, options.password)
+        if (!valid) {
             return loginError;
         }
         return {
