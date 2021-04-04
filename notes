@@ -27,3 +27,4 @@ yarn add express apollo-server-express graphql type-graphql
 yarn add -D @types/express
 localhost:4000/graphql
 yarn add reflect-metadata
+yarn add argon2
