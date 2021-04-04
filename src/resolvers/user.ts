@@ -33,18 +33,26 @@ class UserRespose {
 
 @Resolver()
 export class UserResolver {
-    @Mutation(() => User)
+    @Mutation(() => UserRespose)
     async register(
         @Arg('options') options: UsernamePasswordInput,
         @Ctx() { em }: MyContext
-    ) {
+    ):Promise<UserRespose> {
+        if(options.username.length<=2){
+            return {
+                errors: [{
+                    field: "username",
+                    message: "the username is too short"
+                }]
+            }
+        }
         const hashedPassword = await argon2.hash(options.password)
         const user = em.create(User, {
             username: options.username,
             password: hashedPassword,
         })
         await em.persistAndFlush(user);
-        return user;
+        return {user:user};
     }
 
     @Query(() => UserRespose)
