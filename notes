@@ -28,3 +28,7 @@ yarn add -D @types/express
 localhost:4000/graphql
 yarn add reflect-metadata
 yarn add argon2
+yarn add redis connect-redis express-session
+yarn add -D @types/redis @types/express-session @types/connect-redis
+
+install redix
