@@ -6,6 +6,7 @@ el proyecto es siguiendo el tutorial de benawad https://www.youtube.com/watch?v=
 
 para correrlo en una terminal usar 
 yarn install # la primera vez
+npx mikro-orm migration:create 
 
 yarn watch
 en otra terminal correr 

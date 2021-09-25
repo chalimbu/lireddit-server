@@ -15,10 +15,10 @@ import argon2 from "argon2";
 @InputType()
 class UsernamePasswordInput {
   @Field()
-  username: string;
+  username: string
 
   @Field()
-  password: string;
+  password: string
 }
 
 @ObjectType()
