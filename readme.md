@@ -1,6 +1,6 @@
 # lireddit-server
 
-el proyecto es siguiendo el tutorial de benawad https://www.youtube.com/watch?v=I6ypD7qv3Z8
+el proyecto es siguiendo el tutorial de benawad https://www.youtube.com/watch?v=I6ypD7qv3Z8 around minute 1:50
 
 ## Inicio 
 

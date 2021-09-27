@@ -15,10 +15,10 @@ import argon2 from "argon2";
 @InputType()
 class UsernamePasswordInput {
   @Field()
-  username: string
+  username: string;
 
   @Field()
-  password: string
+  password: string;
 }
 
 @ObjectType()
@@ -57,15 +57,15 @@ export class UserResolver {
       };
     }
     if (options.password.length <= 2) {
-        return {
-          errors: [
-            {
-              field: "password",
-              message: "the password is too short <=2",
-            },
-          ],
-        };
-      }
+      return {
+        errors: [
+          {
+            field: "password",
+            message: "the password is too short <=2",
+          },
+        ],
+      };
+    }
     const hashedPassword = await argon2.hash(options.password);
     const user = em.create(User, {
       username: options.username,
@@ -92,7 +92,7 @@ export class UserResolver {
   @Query(() => UserRespose)
   async login(
     @Arg("options") options: UsernamePasswordInput,
-    @Ctx() { em }: MyContext
+    @Ctx() { em ,req}: MyContext
   ): Promise<UserRespose> {
     const userFound: User | null = await em.findOne(User, {
       username: options.username,
@@ -104,14 +104,16 @@ export class UserResolver {
           message: "could not find a user",
         },
       ],
-    };
+    };//
     if (!userFound) {
       return loginError;
     }
     const valid = await argon2.verify(userFound.password, options.password);
     if (!valid) {
       return loginError;
-    }
+    }//
+    req.session.UserID= userFound.id;
+
     return {
       user: userFound,
     };
