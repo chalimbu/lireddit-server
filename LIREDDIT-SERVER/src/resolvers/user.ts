@@ -41,6 +41,18 @@ class UserRespose {
 
 @Resolver()
 export class UserResolver {
+  @Query(()=>User,{nullable:true})
+  async me(
+    @Ctx(){req,em}: MyContext
+  ){
+    if(!req.session.UserID){
+      return null
+    }
+    const user=await em.findOne(User,req.session.UserID)
+    return user;
+  }
+
+
   @Mutation(() => UserRespose)
   async register(
     @Arg("options") options: UsernamePasswordInput,

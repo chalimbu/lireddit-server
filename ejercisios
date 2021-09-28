@@ -1,9 +1,0 @@
-1. cambiar el archivo src/resolver/user.ts para que el registrar usario devuelva un UserReponse y un error cuando 
-el usuario tenga una longitud menor igual a 2
-probarlo en graphql
-
-
-2.crear una query en user me que retorne el usuario actual o null si no se
-esta logeado chequeando el user id de !req.session.UserID
-probarlo en graphql
-sin mirar la solucion en feature/solucion2
