@@ -1,2 +1,3 @@
 yarn create next-app --example with-chakra-ui lireddit-web
 yarn dev
+yarn add formik
